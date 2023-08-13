@@ -7,6 +7,7 @@ on:
 
 jobs:
   tests:
+    name: Backend tests
     # Разворачиваем окружение:
     runs-on: ubuntu-latest
     # Блок services аналогичен docker-compose.yml
@@ -60,7 +61,7 @@ jobs:
         python manage.py test
 
   build_and_push_to_docker_hub:
-    name: Push Docker image to DockerHub
+    name: Push backend Docker image to DockerHub
     runs-on: ubuntu-latest
     needs: tests
     steps:
@@ -96,6 +97,7 @@ jobs:
           tags: petrovichoriginal/taski_backend:latest
 
   frontend_tests:
+    name: Frontend tests
     runs-on: ubuntu-latest
 
     steps:
@@ -210,4 +212,4 @@ jobs:
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
-        message: Деплой успешно выполнен! 
+        message: Деплой проекта Taski успешно выполнен! 
